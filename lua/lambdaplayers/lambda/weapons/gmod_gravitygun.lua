@@ -217,7 +217,7 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 					local trace = self:Trace( self.attachedProp:WorldSpaceCenter() )
 					local randt1 = self:Trace( self.attachedProp:WorldSpaceCenter() + VectorRand(-5, 15) )
 
-					mainPhys:ApplyForceCenter( self:GetAimVector() * (100000*wepDmgScale:GetFloat()) + self:GetUp()*2500)
+					mainPhys:ApplyForceCenter( self:GetAimVector() * (50000*wepDmgScale:GetFloat()) + self:GetUp()*2500)
 
 					local core = wepent:GetAttachment( wepent:LookupAttachment( "core" ) )
 
