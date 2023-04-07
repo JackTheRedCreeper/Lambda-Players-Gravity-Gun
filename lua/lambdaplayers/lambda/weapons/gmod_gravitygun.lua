@@ -159,8 +159,8 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 								-- Set ourselves as having a prop
 								propGrabbed = true
 								-- Shorten combat distances as we're ready to pummel others!
-								keepdistance = 100
-								attackrange = 500
+								keepdistance = 150
+								attackrange = 600
 								canShoot = true
 							end
 						end
@@ -225,6 +225,8 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 					self.attachedProp = nil
 					-- We are no longer carrying a prop
 					propGrabbed = false
+					keepdistance = 500
+					attackrange = 600
 				else
 					wepent:EmitSound( "weapons/physcannon/physcannon_dryfire.wav", 70 )
 				end
