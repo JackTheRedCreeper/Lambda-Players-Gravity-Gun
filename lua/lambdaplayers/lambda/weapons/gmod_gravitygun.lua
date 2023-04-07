@@ -124,8 +124,7 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 					
 					-- We don't have a prop
 					if propGrabbed == false then
-						print("we don't have a prop")
-						
+					
 						-- Find a prop around us to pick it up
 						local find = lambda:FindInSphere( lambda:GetPos(), 150, function( ent ) if !ent:IsNPC() and ent:GetClass() == "prop_physics" and !ent:IsPlayer() and !ent:IsNextBot() and lambda:CanSee( ent ) and IsValid( ent:GetPhysicsObject() ) and lambda:HasPermissionToEdit( ent ) and ent:GetPhysicsObject():IsMoveable() then return true end end )
 						local prop = find[ random( #find ) ]
@@ -159,9 +158,6 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 								lambda.attachedProp:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 								-- Set ourselves as having a prop
 								propGrabbed = true
-								print("we have a prop now")
-								print(propGrabbed)
-								print(lambda.attachedProp)
 								-- Shorten combat distances as we're ready to pummel others!
 								keepdistance = 100
 								attackrange = 500
@@ -206,7 +202,6 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 		
 		
 			if canShoot == true then
-				print("we're shooting a prop")
 				
 				-- Check for prop integrity and if we're carrying one
 				if IsValid( self.attachedProp ) and self.attachedProp != nil and propGrabbed == true then
@@ -217,7 +212,7 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 					local trace = self:Trace( self.attachedProp:WorldSpaceCenter() )
 					local randt1 = self:Trace( self.attachedProp:WorldSpaceCenter() + VectorRand(-5, 15) )
 
-					mainPhys:ApplyForceCenter( self:GetAimVector() * (50000*wepDmgScale:GetFloat()) + self:GetUp()*2500)
+					mainPhys:ApplyForceCenter( self:GetAimVector() * ((50000+(mainPhys:GetMass()*100))*wepDmgScale:GetFloat()) + self:GetUp()*2500)
 
 					local core = wepent:GetAttachment( wepent:LookupAttachment( "core" ) )
 
@@ -230,7 +225,6 @@ table.Merge( _LAMBDAPLAYERSWEAPONS, {
 					self.attachedProp = nil
 					-- We are no longer carrying a prop
 					propGrabbed = false
-					print("prop was shot")
 				else
 					wepent:EmitSound( "weapons/physcannon/physcannon_dryfire.wav", 70 )
 				end
